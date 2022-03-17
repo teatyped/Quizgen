@@ -1,52 +1,109 @@
-const Questions = [{
-    id: 0,
-    q: "What is capital of India?",
-    a: [{ text: "gandhinagar", isCorrect: false },
-        { text: "Surat", isCorrect: false },
-        { text: "Delhi", isCorrect: true },
-        { text: "mumbai", isCorrect: false }
-    ]
 
-},
-{
-    id: 1,
-    q: "What is the capital of Thailand?",
-    a: [{ text: "Lampang", isCorrect: false,},
-        { text: "phuket", isCorrect: false },
-        { text: "Ayutthaya", isCorrect: false },
-        { text: "Bangkok", isCorrect: true }
-    ]
+let questions = [
 
-},
-{
-    id: 2,
-    q: "What is the capital of Gujarat",
-    a: [{ text: "surat", isCorrect: false },
-        { text: "vadodara", isCorrect: false },
-        { text: "gandhinagar", isCorrect: true },
-        { text: "rajkot", isCorrect: false }
-    ]
+    {
 
-}
+        question : "What does HTML stand for?",
 
-]
+        choiceA : "Correct",
+
+        choiceB : "Wrong",
+
+        choiceC : "Wrong",
+
+        correct : "A"
+
+    },{
+
+        question : "What does CSS stand for?",
+
+        choiceA : "Wrong",
+
+        choiceB : "Correct",
+
+        choiceC : "Wrong",
+
+        correct : "B"
+
+    },{
+
+        question : "What does JS stand for?",
+
+        choiceA : "Wrong",
+
+        choiceB : "Wrong",
+
+        choiceC : "Correct",
+
+        correct : "C"
+
+    }
+
+];
 
 
-var startBlock = document.querySelector("#startBlock");
-var startBtn = document.querySelector("#startBtn");
+var startBlockEl = document.querySelector("#startBlock");
+var startBtnEl = document.querySelector("#startBtn");
+var questionsEl = document.querySelector("#question-here");
 
 
-console.log(startBlock);
 
-var logTest = function(){
+var logTest = function(questions){
     console.log("hello btn clicked");
-    startBlock.remove()
-}
+    var question1 = questions[0];
+    createQuizBlock(question1);
+};
+
+var createQuizBlock = function(questionObj) {
+
+    startBlockEl.remove();
+
+    var q1 = questionObj.question;
+    var cA = questionObj.choiceA;
+    var cB = questionObj.choiceB;
+    var cC = questionObj.choiceC;
 
 
-var creatQuizBlock = function() {
+    var questionDiv = document.createElement("h3");
 
-    
-}
+    questionDiv.className = "questions";
+    questionDiv.innerHTML = q1;
 
-startBtn.addEventListener("click",logTest);
+    var choices = document.createElement("ul");
+    choices.className = "question-list";
+
+    var keys = Object.keys(questionObj);
+   
+    keys.forEach((key) => {
+        console.log(questionObj[key])
+        
+        var listItem = document.createElement("li");
+        listItem.className ="listItem";
+        listItem.innerHTML = questionObj[key];
+        choices.appendChild(listItem);
+    }
+        );
+    questionsEl.append(choices);
+    //questionsEl.append(questionDiv);
+
+};
+
+
+startBtnEl.addEventListener("click",function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    logTest(questions);
+});
+
+
+//taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskDataObj.name + "</h3><span class='task-type'>" + taskDataObj.type + "</span>";
+
+// var actionContainerEl = document.createElement("div");
+// actionContainerEl.className = "task-actions";
+
+// // create edit button
+// var editButtonEl = document.createElement("button");
+// editButtonEl.textContent = "Edit";
+// editButtonEl.className = "btn edit-btn";
+// editButtonEl.setAttribute("data-task-id", taskId);
+// actionContainerEl.appendChild(editButtonEl);
