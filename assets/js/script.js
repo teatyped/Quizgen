@@ -3,10 +3,14 @@ const startButton = document.getElementById('start-btn');
 const questionConEl = document.getElementById('question-container');
 const questionEL = document.getElementById('question');
 const answerBtnEl = document.getElementById('answers-buttons');
+const nextButton = document.getElementById('next-btn');
 
 let score = 0;
 let shuffledQ = "";
 let currentQIndex = "";
+
+
+
 // questions stored in this array
 const questions = [
     {
@@ -30,7 +34,10 @@ const questions = [
 ]
 // event lister to start game on click
 startButton.addEventListener("click", startGame)
-
+nextButton.addEventListener("click", () =>{
+    currentQIndex++
+    setNextQuestion()
+})
 
 // start game function
 function startGame(){
@@ -57,23 +64,61 @@ function showQuestion(question){
     question.answers.forEach(answer => {
         const button = document.createElement('button');
         button.innerText = answer.text;
-        button.classList.add('btn') 
+        button.classList.add('btn') ;
         // check if answer is correct
         if(answer.correct){
             // if true set data set to button
             button.dataset.correct = answer.correct;
         }
-        button.addEventListener("click", selectAnswer)
+        button.addEventListener("click", selectAnswer);
         answerBtnEl.appendChild(button);
     });
 
 };
 
-function selectAnswer(){
-    console.log("in selectAnswer")
+// selectAnswer takes in click event, pulls target event,
+function selectAnswer(event){
+    const selectedBtn = event.target ;
+    console.log(selectedBtn);
+    const correct = selectedBtn.dataset.correct;
+   // setStatusClass(document.body, correct);
+    Array.from(answerBtnEl.children).forEach(button =>{
+        setStatusClass(button, button.dataset.correct)
+    })
+    // check to see if more questions are in the array
+    if (shuffledQ.length > currentQIndex + 1){
+        nextButton.classList.remove('hide');
+    }else{
+        startButton.innerText = "Restart";
+        startButton.classList.remove('hide');
+    }
+
 
 };
+// function will add the correct/wrong class to element to change css, red is wrong blue is right
+function setStatusClass(element, correct) {  
+    clearStatusClass(element, correct);
+    if (correct){
+        element.classList.add('correct');
+    }
+    else {
+        element.classList.add('wrong')
 
+    }
+};
+
+// clear status class in the element if anything
+function clearStatusClass(element) {  
+    element.classList.remove('correct');
+    element.classList.remove('wrong');
+}
+
+
+// removes the default place holders, also hide next-btn
 function resetState(){
-    
+    nextButton.classList.add('hide');
+    while (answerBtnEl.firstChild){
+        answerBtnEl.removeChild(answerBtnEl.firstChild);
+    }
+
 }

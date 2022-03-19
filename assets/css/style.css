@@ -22,12 +22,20 @@ body {
     background-color: var(--hue);
 }
 
-body.correct {
+#feedback{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+   
+}
+
+/* body.correct {
     --hue: var(--hue-correct);
 }
 body.wrong {
      --hue: var(--hue-wrong);
-}
+} */
 
 .container{
     width: 800px;
@@ -35,7 +43,9 @@ body.wrong {
     background-color: rgb(238, 234, 230);
     border-radius: 2px;
     padding: 30px;
+    margin: 0 30px 0 30px;
     box-shadow: 0 0 3px 0px;
+    
 }
 
 .btn-grid{
