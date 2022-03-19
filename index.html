@@ -10,26 +10,30 @@
 </head>
 
 <body>
-   <header>
-    
-        <h1 class="page-title">Quizer</h1>
-
-   </header>
-      
-
-  <main class="page-content" id="page-content">
-        <div class="startBlock" id="startBlock">
+   
+       <!-- <div class="startBlock" id="startBlock">
             <p>Click the button below to start Quizer!</p>
                 <button class="btn" id="startBtn" type="button">Start</button>
-        </div>
+        </div> -->
 
-
-        <div class="quizBlock">
-            <div class="question-container" id="question-here">
-                Question goes here.
+    <div class="container">
+        <div id="question-container" class="hide"></div>
+            <div id="question">Question</div>
+            <div id="ansers-buttons" class="btn-grid">
+                <button class="btn">Answer 1</button>
+                <button class="btn">Answer 2</button>
+                <button class="btn">Answer 3</button>
+                <button class="btn">Answer 4</button>
             </div>
-            <ul class="choices"></ul>
-        </div>
+            <div class="controls">
+                <button id="start-btn"  class="start-btn btn">Start</button>
+                <button id="next-btn"  class="next-btn btn">Next</button>
+
+            </div>
+        
+    </div>
+
+       
 
 
 
@@ -37,7 +41,7 @@
 
 
 
-  </main>
+ 
 
 
 
