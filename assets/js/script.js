@@ -8,7 +8,7 @@ const nextButton = document.getElementById('next-btn');
 let score = 0;
 let shuffledQ = "";
 let currentQIndex = "";
-
+var time = 60;
 
 
 // questions stored in this array
@@ -33,14 +33,33 @@ const questions = [
     }
 ]
 // event lister to start game on click
-startButton.addEventListener("click", startGame)
+startButton.addEventListener("click", () =>{
+    startGame();
+    var intervalId = setInterval(startTimer, 1000);
+    startTimer(intervalId);
+})
 nextButton.addEventListener("click", () =>{
     currentQIndex++
     setNextQuestion()
 })
 
+
+function startTimer(interval){
+    time--;
+    document.querySelector("#time").innerText = time;
+    if (time < 1) {
+        clearInterval(interval)
+    }
+};
+
+
+
+
 // start game function
 function startGame(){
+
+    startTimer();
+
     console.log("start btn clicked");
     startButton.classList.add("hide");
     // get random number < 0 or > 0
