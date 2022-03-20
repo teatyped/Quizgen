@@ -4,11 +4,12 @@ const questionConEl = document.getElementById('question-container');
 const questionEL = document.getElementById('question');
 const answerBtnEl = document.getElementById('answers-buttons');
 const nextButton = document.getElementById('next-btn');
+var timerEl = document.getElementById('countdown');
 
 let score = 0;
 let shuffledQ = "";
 let currentQIndex = "";
-var time = 60;
+var timeLeft = 10;
 
 
 // questions stored in this array
@@ -35,21 +36,26 @@ const questions = [
 // event lister to start game on click
 startButton.addEventListener("click", () =>{
     startGame();
-    var intervalId = setInterval(startTimer, 1000);
-    startTimer(intervalId);
+    startTimer();
 })
 nextButton.addEventListener("click", () =>{
-    currentQIndex++
-    setNextQuestion()
+    currentQIndex++;
+    setNextQuestion();
+    timeLeft = 10;
+    startTimer();
 })
 
 
-function startTimer(interval){
-    time--;
-    document.querySelector("#time").innerText = time;
-    if (time < 1) {
-        clearInterval(interval)
-    }
+function startTimer(){
+    var intervalId = setInterval(function(){
+        if (timeLeft >=1){
+            timerEl.textContent = timeLeft + ' seconds remaining';
+            timeLeft--;
+        }else if(timeLeft === 0){
+            timerEl.textContent = "";
+            clearInterval(intervalId)
+        }
+    }, 1000);
 };
 
 

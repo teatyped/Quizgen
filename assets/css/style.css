@@ -1,6 +1,7 @@
 *, *::before, *::after {
     box-sizing: border-box;
     font-family: 'Courier New', Courier, monospace;
+
 }
 
 :root{
@@ -10,12 +11,12 @@
 }
 
 
-body {
+.itsYoBody {
     --hue: var(--hue-neutral);
     padding: 0;
     margin: 0;
     display: flex;
-    width: 100vw;
+    width: auto;
     height: 100vh;
     justify-content: center;
     align-items: center;
@@ -60,7 +61,7 @@ body.wrong {
     background-color: var(--hue);
     border: 1px solid black;
     border-radius: 5px;
-    padding: 5px 10px;
+    padding: 10px 10px;
     color: black;
     outline: none;
 }
@@ -93,3 +94,17 @@ body.wrong {
     display: none;
 }
 
+.header-holder{
+    --hue: var(--hue-neutral);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: auto;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--hue);
+}
+.header-holder h4{
+    padding-top: 20px;
+}
