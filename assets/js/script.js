@@ -33,7 +33,7 @@ const questions = [
         ]
     }
 ]
-// event lister to start game on click
+// event lister to start game on click and start timer
 startButton.addEventListener("click", () =>{
     startGame();
     startTimer();
@@ -41,6 +41,7 @@ startButton.addEventListener("click", () =>{
 nextButton.addEventListener("click", () =>{
     currentQIndex++;
     setNextQuestion();
+    // reset timer to 10 and call again on next question
     timeLeft = 10;
     startTimer();
 })
@@ -64,7 +65,7 @@ function startTimer(){
 // start game function
 function startGame(){
 
-    startTimer();
+    //startTimer();
 
     console.log("start btn clicked");
     startButton.classList.add("hide");
