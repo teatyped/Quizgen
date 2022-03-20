@@ -5,6 +5,9 @@ const questionEL = document.getElementById('question');
 const answerBtnEl = document.getElementById('answers-buttons');
 const nextButton = document.getElementById('next-btn');
 var timerEl = document.getElementById('countdown');
+var formEl = document.getElementById('end-form');
+var end = document.getElementById('end-container');
+var clock = document.getElementById('clock');
 
 let score = 0;
 let shuffledQ = "";
@@ -42,7 +45,6 @@ nextButton.addEventListener("click", () =>{
     currentQIndex++;
     setNextQuestion();
     // reset timer to 10 and call again on next question
-    timeLeft = 10;
     startTimer();
 })
 
@@ -50,11 +52,13 @@ nextButton.addEventListener("click", () =>{
 function startTimer(){
     var intervalId = setInterval(function(){
         if (timeLeft >=1){
+
             timerEl.textContent = timeLeft + ' seconds remaining';
             timeLeft--;
         }else if(timeLeft === 0){
             timerEl.textContent = "";
-            clearInterval(intervalId)
+            clearInterval(intervalId);
+            endGame();
         }
     }, 1000);
 };
@@ -65,7 +69,7 @@ function startTimer(){
 // start game function
 function startGame(){
 
-    //startTimer();
+    
 
     console.log("start btn clicked");
     startButton.classList.add("hide");
@@ -107,6 +111,12 @@ function selectAnswer(event){
     const selectedBtn = event.target ;
     console.log(selectedBtn);
     const correct = selectedBtn.dataset.correct;
+    if (correct){
+        score += timeLeft;
+        console.log(" score currently "+ score);
+    }else{
+        timeLeft -= 10;
+    }
    // setStatusClass(document.body, correct);
     Array.from(answerBtnEl.children).forEach(button =>{
         setStatusClass(button, button.dataset.correct)
@@ -115,8 +125,8 @@ function selectAnswer(event){
     if (shuffledQ.length > currentQIndex + 1){
         nextButton.classList.remove('hide');
     }else{
-        startButton.innerText = "Restart";
-        startButton.classList.remove('hide');
+        // call endGame function to show end- and log info such as score.
+        endGame();
     }
 
 
@@ -146,5 +156,20 @@ function resetState(){
     while (answerBtnEl.firstChild){
         answerBtnEl.removeChild(answerBtnEl.firstChild);
     }
+
+}
+
+function endGame(){
+    // log score
+    var finalScore = score;
+    console.log("final " + finalScore);
+    timeLeft = "";
+    clock.classList.add('hide');
+    questionConEl.classList.add('hide');
+    end.classList.remove('hide');
+    // get user input
+    // store input/ score into array
+    // store array into local storage 
+
 
 }
