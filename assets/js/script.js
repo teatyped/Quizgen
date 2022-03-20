@@ -8,11 +8,16 @@ var timerEl = document.getElementById('countdown');
 var formEl = document.getElementById('end-form');
 var end = document.getElementById('end-container');
 var clock = document.getElementById('clock');
+var scoreBox = document.getElementById('score-box')
+
+
 
 let score = 0;
 let shuffledQ = "";
 let currentQIndex = "";
 var timeLeft = 10;
+
+let finalInfo = [];
 
 
 // questions stored in this array
@@ -162,14 +167,24 @@ function resetState(){
 function endGame(){
     // log score
     var finalScore = score;
-    console.log("final " + finalScore);
+    scoreBox.textContent = "final score " + finalScore;
+    console.log("final " + finalScore);// testing 
+    
+    // stop timer, hide timer container. hide question container, show end container
     timeLeft = "";
     clock.classList.add('hide');
     questionConEl.classList.add('hide');
     end.classList.remove('hide');
     // get user input
-    // store input/ score into array
+    formEl.addEventListener("submit", (event) => {
+        event.preventDefault();
+        var userInput = document.querySelector("input[name='initials']").value;
+        console.log(userInput); // testing
+        // store input/ score into array
+        localStorage.setItem("User", userInput);
+    })
     // store array into local storage 
+    localStorage.setItem("finalScore", finalScore);
 
 
 }
