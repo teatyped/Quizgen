@@ -10,6 +10,7 @@ var end = document.getElementById("end-container");
 var clock = document.getElementById("clock");
 var scoreBox = document.getElementById("score-box");
 var highScore = document.getElementById('high-score');
+var controls = document.getElementById('controls');
 
 let score = 0;
 let shuffledQ = "";
@@ -74,6 +75,8 @@ function startGame() {
 
     end.classList.add('hide');
   startButton.classList.add("hide");
+  startButton.innerText = "Start";
+  
   // get random number < 0 or > 0
   shuffledQ = questions.sort(() => Math.random() - 0.5);
   currentQIndex = 0;
@@ -112,7 +115,8 @@ function selectAnswer(event) {
   console.log(selectedBtn);
   const correct = selectedBtn.dataset.correct;
   if (correct) {
-    score += timeLeft;
+   // score += timeLeft;
+    score++;
     console.log(" score currently " + score);
   } else {
     timeLeft -= 10;
@@ -170,7 +174,10 @@ function endGame() {
   formEl.addEventListener("submit", (event) => {
     event.preventDefault();
     var userInput = document.querySelector("input[name='initials']").value;
-    console.log(userInput); // testing
+
+    if(!userInput){
+        return false;
+    }
     // object array to store user info
     var userScore = {
       initials: userInput,
@@ -189,14 +196,25 @@ function endGame() {
 }
 
 function showScores() {
-    formEl.reset();
+    // reset endgame form and removed for next round
+   // formEl.reset();
     formEl.remove();
+    // make restart game happen
     startButton.innerText="Restart"
     startButton.classList.remove('hide');
 
-    var highText = document.createElement("h4");
+// make clear highscore btn here// will reset local storage
+    //var clear = document.createElement("button");
     
-    var finalInfo = JSON.parse(localStorage.getItem("finalInfo")) || []
+    // clear.classList = "btn start-btn";
+    // clear.textContent ="Clear HighScores";
+    // controls.appendChild(clear);
+    // clear.addEventListener("click", ()=>{
+    //     localStorage.clear();
+    //     subEl.reset();
+    // });
+    
+    var finalInfo = JSON.parse(localStorage.getItem("finalInfo")) || [];
     for (i = 0; i < finalInfo.length; i++) {
         var subEl = document.createElement("li");
         subEl.className ="high-list";
